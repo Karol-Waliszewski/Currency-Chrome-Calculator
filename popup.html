@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Currency Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="field has-addons">
+      <p class="control">
+        <span class="select is-small" style="max-width: 150px;">
+          <select id="mainCurrency"></select>
+        </span>
+      </p>
+      <p class="control">
+        <input class="input is-small" type="number" placeholder="Amount of money" id="mainCurrencyInput" min="0" value="1">
+      </p>
+    </div>
+    <button id="swap" class="button">swap</button>
+    <div class="field has-addons">
+      <p class="control">
+        <span class="select is-small" style="max-width: 150px;">
+          <select id="secondaryCurrency"></select>
+        </span>
+      </p>
+      <p class="control">
+        <input class="input is-small" type="number" placeholder="Result" id="secondaryCurrencyResult" readonly>
+      </p>
+    </div>
+  </div>
+  <script src="./scripts/popup.js"></script>
+</body>
+
+</html>
