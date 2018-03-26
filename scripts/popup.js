@@ -24,7 +24,7 @@ const Module = (function() {
     // HTML string
     let options = '';
     for (let currency of currencies) {
-      options += `<option value=${currency.mid}>${currency.currency}</option>`
+      options += `<option value=${currency.mid}>${currency.currency} (${currency.code})</option>`
     }
     $mainCurrency.innerHTML = options;
     $secondaryCurrency.innerHTML = options;
@@ -70,7 +70,7 @@ const Module = (function() {
       // Always shows 2 decimals (estetic :))
       $mainCurrencyInput.value = Number($mainCurrencyInput.value).toFixed(2);
     });
-    // Last but not least 
+    // Last but not least
     convert();
   }
 

@@ -1,11 +1,12 @@
-var euro, dolar;
-
 window.Currencies = (function() {
 
   var currencies = [];
   var tables = ['a', 'b', 'c'];
 
   var loadCurrencies = function() {
+    console.log(
+      'LOAD'
+    )
     // Getting tables from NBP api
     Promise.all(tables.map(table =>
       fetch(`http://api.nbp.pl/api/exchangerates/tables/${table}`).then(responses => responses.json())
@@ -18,6 +19,7 @@ window.Currencies = (function() {
     })
   }
 
+  // Simple getter
   var getCurrencies = () => currencies;
 
   var compareCurrencies = function(mainCurrency, secondaryCurrency) {
@@ -25,7 +27,17 @@ window.Currencies = (function() {
     return mainCurrency / secondaryCurrency;
   }
 
-  loadCurrencies();
+  var init = function() {
+    // Loop (every 10 seconds)
+    setInterval(function() {
+      // if currencies are not loaded, load them.
+      if (currencies.length < 1)
+        loadCurrencies();
+      // If currencies are already loaded, clear interval.
+      else
+        clearInterval(this);
+    }, 1000 * 10);
+  }();
 
   return {
     get: getCurrencies,
