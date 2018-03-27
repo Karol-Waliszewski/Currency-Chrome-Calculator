@@ -6,33 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Currency Calculator</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
 
 <body>
   <div class="container">
 
-    <div class="field has-addons">
-      <p class="control">
-        <span class="select is-small" style="max-width: 150px;">
-          <select id="mainCurrency"></select>
-        </span>
-      </p>
-      <p class="control">
-        <input class="input is-small" type="number" placeholder="Amount of money" id="mainCurrencyInput" min="0" value="1">
-      </p>
+    <div class="control">
+      <div class="select" title="Choose currency">
+        <select id="mainCurrency"></select>
+      </div>
+      <input class="input" type="number" placeholder="Amount of money" id="mainCurrencyInput" min="0" value="1">
     </div>
-    <button id="swap" class="button">swap</button>
-    <div class="field has-addons">
-      <p class="control">
-        <span class="select is-small" style="max-width: 150px;">
-          <select id="secondaryCurrency"></select>
-        </span>
-      </p>
-      <p class="control">
-        <input class="input is-small" type="number" placeholder="Result" id="secondaryCurrencyResult" readonly>
-      </p>
+
+    <button class="button" id="swap" title="Swap the currencies">
+      <img src="./images/swap-arrows.svg" alt="swap arrows" class="button__icon">
+    </button>
+
+    <div class="control">
+      <div class="select"  title="Choose currency">
+        <select id="secondaryCurrency"></select>
+      </div>
+      <input class="input" type="number" placeholder="Result" id="secondaryCurrencyResult" readonly>
     </div>
+
+  </div>
+
+  <div class="error">
+    <article>
+      <p id="error">Error Message</p>
+    </article>
   </div>
   <script src="./scripts/popup.js"></script>
 </body>

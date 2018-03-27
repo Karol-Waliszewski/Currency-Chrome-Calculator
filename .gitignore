@@ -1,0 +1,3 @@
+*.map
+.jshintrc
+.sass-cache

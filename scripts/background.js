@@ -4,9 +4,6 @@ window.Currencies = (function() {
   var tables = ['a', 'b', 'c'];
 
   var loadCurrencies = function() {
-    console.log(
-      'LOAD'
-    )
     // Getting tables from NBP api
     Promise.all(tables.map(table =>
       fetch(`http://api.nbp.pl/api/exchangerates/tables/${table}`).then(responses => responses.json())
@@ -15,9 +12,23 @@ window.Currencies = (function() {
       data.map(table => {
         // Pushing everything to one array
         currencies.push(...table[0].rates);
-      })
-    })
-  }
+      });
+
+      // Removing renewals //TODO improve
+      currencies = new Set(currencies);
+      currencies = [...currencies];
+
+      console.log(currencies);
+
+      // if everything's fine, enclose PLN currency aswell :)
+      if (currencies.length > 0)
+        currencies.push({
+          currency: 'polski zloty',
+          code: 'PLN',
+          mid: 1
+        });
+    });
+  };
 
   // Simple getter
   var getCurrencies = () => currencies;
@@ -25,7 +36,7 @@ window.Currencies = (function() {
   var compareCurrencies = function(mainCurrency, secondaryCurrency) {
     // Comparing second currency to first one
     return mainCurrency / secondaryCurrency;
-  }
+  };
 
   var init = function() {
     // Loop (every 10 seconds)
@@ -42,6 +53,6 @@ window.Currencies = (function() {
   return {
     get: getCurrencies,
     compare: compareCurrencies
-  }
+  };
 
 })();

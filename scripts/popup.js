@@ -2,7 +2,7 @@ const Background = chrome.extension.getBackgroundPage();
 const {
   console,
   Currencies
-} = Background
+} = Background;
 
 // Error catching on popup.js (otherwise errors won't show up :/)
 window.onerror = function(message, file, line, col, error) {
@@ -24,16 +24,16 @@ const Module = (function() {
     // HTML string
     let options = '';
     for (let currency of currencies) {
-      options += `<option value=${currency.mid}>${currency.currency} (${currency.code})</option>`
+      options += `<option value=${currency.mid}>${currency.currency} (${currency.code})</option>`;
     }
     $mainCurrency.innerHTML = options;
     $secondaryCurrency.innerHTML = options;
-  }
+  };
 
   var setDefaultCurrencies = function() {
     $mainCurrency.value = Currencies.get()[2].mid; // USD
     $secondaryCurrency.value = Currencies.get()[7].mid; // EUR
-  }
+  };
 
   var swap = function() {
     // Currencies swapping
@@ -42,10 +42,10 @@ const Module = (function() {
     $secondaryCurrency.value = currencyStorage;
 
     // Values swapping
-    let valueStorage = $mainCurrencyInput.value
+    let valueStorage = $mainCurrencyInput.value;
     $mainCurrencyInput.value = $secondaryCurrencyResult.value;
     $secondaryCurrencyResult.value = valueStorage;
-  }
+  };
 
   var convert = function() {
     let mainCurrency = $mainCurrency.value;
@@ -53,7 +53,7 @@ const Module = (function() {
     let mainCurrencyValue = $mainCurrencyInput.value;
     // Rounding result to 2 decimal places and then
     $secondaryCurrencyResult.value = (Currencies.compare(mainCurrency, secondaryCurrency) * mainCurrencyValue).toFixed(2);
-  }
+  };
 
   // On Popup show function
   var init = function() {
@@ -64,15 +64,14 @@ const Module = (function() {
     $swapButton.addEventListener('click', swap);
     $mainCurrency.addEventListener('change', convert);
     $secondaryCurrency.addEventListener('change', convert);
-    $mainCurrencyInput.addEventListener('input', function() {
-      // Main Event
-      convert();
+    $mainCurrencyInput.addEventListener('input', convert);
+    $mainCurrencyInput.addEventListener('change', function() {
       // Always shows 2 decimals (estetic :))
       $mainCurrencyInput.value = Number($mainCurrencyInput.value).toFixed(2);
     });
     // Last but not least
     convert();
-  }
+  };
 
   init();
 
