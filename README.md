@@ -7,4 +7,5 @@ I've created this project using **[NBP Api](http://api.nbp.pl/en.html)** :chart_
 - [x] Create currencies convertion
 - [x] Style HTML
 - [ ] Translate currencies from Polish to English
-- [ ] Sort currencies alphabetical
+- [x] Sort currencies alphabetical
+- [ ] Create options

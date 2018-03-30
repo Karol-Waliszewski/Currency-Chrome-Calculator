@@ -1,5 +1,6 @@
 window.Currencies = (function() {
 
+  var alphabet = 'abcdefghijklmnopqrstuvwxyz';
   var currencies = [];
   var tables = ['a', 'b', 'c'];
 
@@ -18,16 +19,65 @@ window.Currencies = (function() {
       currencies = new Set(currencies);
       currencies = [...currencies];
 
-      console.log(currencies);
+      // if everything's fine, enclose PLN currency aswell and sort them :)
+      if (currencies.length > 0) {
 
-      // if everything's fine, enclose PLN currency aswell :)
-      if (currencies.length > 0)
         currencies.push({
-          currency: 'polski zloty',
+          currency: 'polski złoty',
           code: 'PLN',
           mid: 1
         });
+
+        currencies = sortArrayBy(currencies, 'currency');
+        currencies = removeRenewals(currencies);
+        console.log(currencies);
+      }
     });
+  };
+
+  var removeRenewals = function(array) {
+    return array.filter((el, index) => {
+      if (index == array.length - 1)
+        return el;
+      if (el.code != array[index + 1].code)
+        return el;
+    });
+  };
+
+  var alphabetIndex = function(name, index) {
+    if (typeof name[index] != 'string')
+      return -1;
+    return alphabet.indexOf(name[index].toLowerCase());
+  };
+
+  var sortArrayBy = function(array, prop) {
+
+    let compareNumbers = function(a, b) {
+      return a[prop] - b[prop];
+    };
+
+    let compareStrings = function(a, b) {
+      let comparingIndex = 0;
+      do {
+        if (alphabetIndex(a[prop], comparingIndex) < alphabetIndex(b[prop], comparingIndex)) {
+          return -1;
+        } else if (alphabetIndex(a[prop], comparingIndex) > alphabetIndex(b[prop], comparingIndex)) {
+          return 1;
+        } else if (comparingIndex == a[prop].length) {
+          return -1;
+        } else if (comparingIndex == b[prop].length) {
+          return 1;
+        } else {
+          comparingIndex++;
+        }
+      } while (true);
+    };
+
+    if (typeof array[0][prop] == 'string')
+      return array.sort(compareStrings);
+    else
+      return array.sort(compareNumbers);
+
   };
 
   // Simple getter

@@ -31,8 +31,8 @@ const Module = (function() {
   };
 
   var setDefaultCurrencies = function() {
-    $mainCurrency.value = Currencies.get()[2].mid; // USD
-    $secondaryCurrency.value = Currencies.get()[7].mid; // EUR
+    $mainCurrency.value = Currencies.get()[23].mid; // USD
+    $secondaryCurrency.value = Currencies.get()[45].mid; // EUR
   };
 
   var swap = function() {
