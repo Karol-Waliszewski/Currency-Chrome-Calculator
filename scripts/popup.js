@@ -18,9 +18,11 @@ const Module = (function() {
     $secondaryCurrencyResult = document.getElementById('secondaryCurrencyResult'),
     $swapButton = document.getElementById('swap');
 
+  var currencies = [];
+
   var importCurrencies = function() {
     // Fetched currencies
-    let currencies = Currencies.get();
+    currencies = Currencies.get();
     // HTML string
     let options = '';
     for (let currency of currencies) {
@@ -30,9 +32,29 @@ const Module = (function() {
     $secondaryCurrency.innerHTML = options;
   };
 
+  var findCurrencyByCode = function(code) {
+    if (currencies.length < 1)
+      return -1;
+    else {
+      let codes = currencies.map(el => el.code);
+      return currencies[codes.indexOf(code)];
+    }
+  };
+
   var setDefaultCurrencies = function() {
-    $mainCurrency.value = Currencies.get()[23].mid; // USD
-    $secondaryCurrency.value = Currencies.get()[45].mid; // EUR
+    // Getting default currencies from options.
+    // If there is no defaults they'll be USD and EUR
+    chrome.storage.sync.get({
+      primary: 'USD',
+      secondary: 'EUR'
+    }, function(defaults) {
+      // Getting currencies
+      let primaryCurrency = findCurrencyByCode(defaults.primary);
+      let secondaryCurrency = findCurrencyByCode(defaults.secondary);
+      // Setting defaults
+      $mainCurrency.value = primaryCurrency.mid;
+      $secondaryCurrency.value = secondaryCurrency.mid;
+    });
   };
 
   var swap = function() {
@@ -70,9 +92,7 @@ const Module = (function() {
       $mainCurrencyInput.value = Number($mainCurrencyInput.value).toFixed(2);
     });
     // Last but not least
-    convert();
-  };
-
-  init();
+    setTimeout(convert, 20);
+  }();
 
 })();

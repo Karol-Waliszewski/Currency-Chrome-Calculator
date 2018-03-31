@@ -36,6 +36,7 @@ window.Currencies = (function() {
   };
 
   var removeRenewals = function(array) {
+    // If next element has got the same currency code that means renewal, so skip element
     return array.filter((el, index) => {
       if (index == array.length - 1)
         return el;
@@ -44,25 +45,36 @@ window.Currencies = (function() {
     });
   };
 
+
+  // Gets char index in alphabet
   var alphabetIndex = function(name, index) {
+    // If name variable isn't string return -1 (did not found)
     if (typeof name[index] != 'string')
       return -1;
+    // Else
     return alphabet.indexOf(name[index].toLowerCase());
   };
 
   var sortArrayBy = function(array, prop) {
 
+    // Sort numbers ascending
     let compareNumbers = function(a, b) {
       return a[prop] - b[prop];
     };
 
+    // Sort strings alphabetical
     let compareStrings = function(a, b) {
+      // Current checking letter index
       let comparingIndex = 0;
+      // Infinite Loop
       do {
         if (alphabetIndex(a[prop], comparingIndex) < alphabetIndex(b[prop], comparingIndex)) {
+          // swap
           return -1;
         } else if (alphabetIndex(a[prop], comparingIndex) > alphabetIndex(b[prop], comparingIndex)) {
+          // no swap
           return 1;
+          // If it's the last char
         } else if (comparingIndex == a[prop].length) {
           return -1;
         } else if (comparingIndex == b[prop].length) {

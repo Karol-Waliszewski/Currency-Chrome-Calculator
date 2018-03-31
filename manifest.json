@@ -3,12 +3,13 @@
   "description": "Fast and convenient currency calculator",
   "manifest_version": 2,
   "version": "1.1",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab","storage"],
   "background": {
     "scripts": ["./scripts/background.js"]
   },
+  "options_page" : "./pages/options.html",
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "./pages/popup.html",
     "default_icon": "./icons/icon128.png"
   },
   "icons": {
