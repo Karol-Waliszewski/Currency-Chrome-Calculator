@@ -1,6 +1,5 @@
 window.Currencies = (function() {
 
-  var alphabet = 'abcdefghijklmnopqrstuvwxyz';
   var currencies = [];
   var tables = ['a', 'b', 'c'];
 
@@ -48,6 +47,7 @@ window.Currencies = (function() {
 
   // Gets char index in alphabet
   var alphabetIndex = function(name, index) {
+    let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     // If name variable isn't string return -1 (did not found)
     if (typeof name[index] != 'string')
       return -1;

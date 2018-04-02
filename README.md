@@ -10,4 +10,4 @@ I've created this project using **[NBP Api](http://api.nbp.pl/en.html)** :chart_
 - [x] Sort currencies alphabetical
 - [x] Create options
 - [ ] Add more options
-- [ ] Create credentials
+- [x] Create credentials

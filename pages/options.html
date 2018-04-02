@@ -10,29 +10,36 @@
 </head>
 
 <body>
-  <div class="center">
-    <main class="container">
-      <h1 class="title">Currency Calculator</h1>
+  <header class="header">
+    <h1 class="header__title">Currency Calculator</h1>
+  </header>
 
+  <main class="options center">
+    <div>
+      <h3 class="options__title">Default currencies:</h3>
 
-      <h2 class="subtitle">Choose default currencies</h2>
       <div class="control">
-        <label for="primaryDefault" class="label">Primary</label>
-        <div class="select" title="Choose currency">
+        <label for="primaryDefault" class="control__label">Primary</label>
+        <div class="control__select" title="Choose currency">
           <select id="primaryDefault"></select>
         </div>
       </div>
 
-
       <div class="control">
-        <label for="secondaryDefault" class="label">Secondary</label>
-        <div class="select" title="Choose currency">
+        <label for="secondaryDefault" class="control__label">Secondary</label>
+        <div class="control__select" title="Choose currency">
           <select id="secondaryDefault"></select>
         </div>
       </div>
+    </div>
+  </main>
 
-    </main>
-  </div>
+  <footer class="footer">
+    <h2 class="footer__text">Created by
+        <a class="footer__link" href="https://github.com/Karol-Waliszewski">Karol Waliszewski</a>
+      </h2>
+  </footer>
+
   <script src="../scripts/options.js"></script>
 </body>
 
